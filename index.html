@@ -1,1 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Treinamento de Sustentabilidade</title>
 
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    background:#f2f5f2;
+}
+
+.tela{
+    display:none;
+    padding:40px;
+    min-height:100vh;
+}
+
+.ativa{
+    display:block;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 0 15px rgba(0,0,0,0.1);
+}
+
+h1,h2{
+    color:#2e7d32;
+    margin-bottom:20px;
+}
+
+p,li{
+    margin-bottom:15px;
+    line-height:1.6;
+}
+
+button{
+    background:#2e7d32;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:8px;
+    cursor:pointer;
+    margin-top:20px;
+    font-size:16px;
+}
+
+button:hover{
+    background:#1b5e20;
+}
+
+.lixeiras{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-top:30px;
+}
+
+.lixeira{
+    width:150px;
+    height:150px;
+    border-radius:15px;
+    color:white;
+    font-weight:bold;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:10px;
+}
+
+.azul{background:#2196F3;}
+.vermelho{background:#F44336;}
+.amarelo{background:#FFC107;color:black;}
+.verde{background:#4CAF50;}
+.marrom{background:#795548;}
+
+.itens{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    justify-content:center;
+    margin-top:30px;
+}
+
+.item{
+    background:#e0e0e0;
+    padding:10px 20px;
+    border-radius:10px;
+    cursor:grab;
+}
+
+.pergunta{
+    margin-bottom:25px;
+}
+
+#resultado{
+    font-size:22px;
+    margin-top:20px;
+    color:#2e7d32;
+}
+</style>
+</head>
+<body>
+
+<!-- TELA 1 -->
+<div class="tela ativa" id="tela1">
+    <div class="container" style="text-align:center">
+        <h1>🌱 Treinamento de Sustentabilidade</h1>
+        <p>Aprenda rapidamente sobre sustentabilidade no ambiente de trabalho, separação correta dos resíduos e boas práticas sustentáveis.</p>
+
+        <button onclick="trocarTela('tela2')">Iniciar Treinamento</button>
+    </div>
+</div>
+
+<!-- TELA 2 -->
+<div class="tela" id="tela2">
+    <div class="container">
+        <h2>Recapitulando</h2>
+
+        <p><b>🌱 O que é sustentabilidade?</b><br>
+        Utilizar os recursos atuais sem comprometer as futuras gerações.</p>
+
+        <p><b>🏢 Sustentabilidade no trabalho</b><br>
+        Utilizar água, energia e materiais de forma consciente e responsável.</p>
+
+        <p><b>⚠ Desperdícios comuns:</b></p>
+        <ul>
+            <li>Luzes ligadas sem necessidade;</li>
+            <li>Equipamentos ligados sem utilização;</li>
+            <li>Impressões desnecessárias;</li>
+            <li>Desperdício de água;</li>
+            <li>Uso excessivo de descartáveis.</li>
+        </ul>
+
+        <p><b>✅ Boas práticas:</b></p>
+        <ul>
+            <li>Economizar energia;</li>
+            <li>Economizar água;</li>
+            <li>Reduzir o uso de papel;</li>
+            <li>Reutilizar materiais;</li>
+            <li>Separar corretamente os resíduos.</li>
+        </ul>
+
+        <button onclick="trocarTela('tela3')">Ir para a Separação de Lixo</button>
+    </div>
+</div>
+
+<!-- TELA 3 -->
+<div class="tela" id="tela3">
+    <div class="container">
+        <h2>🗑 Arraste cada material para a lixeira correta</h2>
+
+        <div class="itens" id="itens">
+            <div class="item" draggable="true" id="plastico">🥤 Garrafa PET</div>
+            <div class="item" draggable="true" id="papel">📄 Folha de papel</div>
+            <div class="item" draggable="true" id="metal">🥫 Lata</div>
+            <div class="item" draggable="true" id="organico">🍌 Casca de banana</div>
+            <div class="item" draggable="true" id="vidro">🍾 Garrafa de vidro</div>
+            <div class="item" draggable="true" id="papel2">📦 Caixa de papelão</div>
+            <div class="item" draggable="true" id="plastico2">🧴 Pote plástico</div>
+            <div class="item" draggable="true" id="metal2">🔩 Tampa metálica</div>
+        </div>
+
+        <div class="lixeiras">
+            <div class="lixeira azul" data-tipo="papel">🟦 Papel</div>
+            <div class="lixeira vermelho" data-tipo="plastico">🟥 Plástico</div>
+            <div class="lixeira amarelo" data-tipo="metal">🟨 Metal</div>
+            <div class="lixeira verde" data-tipo="vidro">🟩 Vidro</div>
+            <div class="lixeira marrom" data-tipo="organico">🟫 Orgânico</div>
+        </div>
+
+        <button id="btnQuiz" onclick="trocarTela('tela4')" style="display:none">
+            Ir para o Quiz
+        </button>
+    </div>
+</div>
+
+<!-- TELA 4 -->
+<div class="tela" id="tela4">
+    <div class="container">
+
+        <h2>📝 Quiz Final</h2>
+
+        <div class="pergunta">
+            <p><b>1. Qual é o objetivo da sustentabilidade?</b></p>
+            <input type="radio" name="q1" value="0"> Utilizar todos os recursos disponíveis.<br>
+            <input type="radio" name="q1" value="1"> Atender às necessidades atuais sem prejudicar as futuras gerações.<br>
+        </div>
+
+        <div class="pergunta">
+            <p><b>2. Deixar luzes acesas sem necessidade é:</b></p>
+            <input type="radio" name="q2" value="1"> Desperdício de recursos.<br>
+            <input type="radio" name="q2" value="0"> Uma prática sustentável.<br>
+        </div>
+
+        <div class="pergunta">
+            <p><b>3. Onde deve ser descartada uma garrafa PET?</b></p>
+            <input type="radio" name="q3" value="1"> Plástico.<br>
+            <input type="radio" name="q3" value="0"> Papel.<br>
+            <input type="radio" name="q3" value="0"> Metal.<br>
+        </div>
+
+        <div class="pergunta">
+            <p><b>4. Qual prática ajuda o meio ambiente?</b></p>
+            <input type="radio" name="q4" value="1"> Reutilizar materiais.<br>
+            <input type="radio" name="q4" value="0"> Aumentar o uso de descartáveis.<br>
+        </div>
+
+        <div class="pergunta">
+            <p><b>5. Qual destes é um desperdício comum no trabalho?</b></p>
+            <input type="radio" name="q5" value="1"> Impressões desnecessárias.<br>
+            <input type="radio" name="q5" value="0"> Separação correta dos resíduos.<br>
+        </div>
+
+        <button onclick="corrigirQuiz()">Finalizar Treinamento</button>
+
+        <div id="resultado"></div>
+
+    </div>
+</div>
+
+<script>
+
+function trocarTela(id){
+    document.querySelectorAll(".tela").forEach(t=>{
+        t.classList.remove("ativa");
+    });
+
+    document.getElementById(id).classList.add("ativa");
+}
+
+let itemArrastado;
+let corretos = 0;
+
+document.querySelectorAll(".item").forEach(item=>{
+    item.addEventListener("dragstart",()=>{
+        itemArrastado = item;
+    });
+});
+
+document.querySelectorAll(".lixeira").forEach(lixeira=>{
+
+    lixeira.addEventListener("dragover",(e)=>{
+        e.preventDefault();
+    });
+
+    lixeira.addEventListener("drop",()=>{
+
+        let tipo = lixeira.dataset.tipo;
+        let id = itemArrastado.id;
+
+        let correto =
+            (tipo=="plastico" && id.includes("plastico")) ||
+            (tipo=="papel" && id.includes("papel")) ||
+            (tipo=="metal" && id.includes("metal")) ||
+            (tipo=="vidro" && id.includes("vidro")) ||
+            (tipo=="organico" && id.includes("organico"));
+
+        if(correto){
+            lixeira.appendChild(itemArrastado);
+            itemArrastado.style.cursor="default";
+            itemArrastado.setAttribute("draggable","false");
+            corretos++;
+
+            if(corretos==8){
+                alert("Parabéns! Você separou todos os resíduos corretamente.");
+                document.getElementById("btnQuiz").style.display="inline-block";
+            }
+        }
+        else{
+            alert("Essa não é a lixeira correta.");
+        }
+
+    });
+
+});
+
+function corrigirQuiz(){
+
+    let pontos = 0;
+
+    for(let i=1;i<=5;i++){
+        let resposta = document.querySelector(`input[name="q${i}"]:checked`);
+
+        if(resposta){
+            pontos += Number(resposta.value);
+        }
+    }
+
+    document.getElementById("resultado").innerHTML =
+    `🏆 Você acertou ${pontos} de 5 perguntas.<br><br>`;
+
+    if(pontos==5){
+        document.getElementById("resultado").innerHTML +=
+        "Excelente! Você concluiu o treinamento com aproveitamento máximo.";
+    }
+    else if(pontos>=3){
+        document.getElementById("resultado").innerHTML +=
+        "Bom trabalho! Você compreendeu os conceitos principais.";
+    }
+    else{
+        document.getElementById("resultado").innerHTML +=
+        "Revise o conteúdo e tente novamente.";
+    }
+}
+
+</script>
+
+</body>
+</html>
